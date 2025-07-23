@@ -1,0 +1,35 @@
+
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <title>Prozent-Summenrechner für HTML colgroup</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        textarea { width: 100%; height: 150px; }
+        button { margin-top: 10px; padding: 10px 20px; }
+        #result { margin-top: 20px; font-weight: bold; }
+    </style>
+</head>
+<body>
+    <h2>Prozent-Summenrechner für HTML colgroup</h2>
+    <p>Füge hier eine HTML-Zeile mit <code>&lt;col style="width: ...%"&gt;</code> ein:</p>
+    <textarea id="htmlInput" placeholder="&lt;colgroup&gt; &lt;col style='width: 25.0%;'/&gt; ... &lt;/colgroup&gt;"></textarea>
+    <br>
+    <button onclick="calculateSum()">Berechne Summe</button>
+    <div id="result"></div>
+
+    <script>
+        function calculateSum() {
+            const input = document.getElementById("htmlInput").value;
+            const regex = /width:\s*([\d.]+)%/g;
+            let match;
+            let sum = 0;
+            while ((match = regex.exec(input)) !== null) {
+                sum += parseFloat(match[1]);
+            }
+            document.getElementById("result").innerText = "Summe der Prozentwerte: " + sum.toFixed(2) + " %";
+        }
+    </script>
+</body>
+</html>
